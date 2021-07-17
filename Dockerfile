@@ -1,9 +1,13 @@
 FROM centos:7
 RUN yum install -y java
 RUN yum install -y python3
-ARG PKG_NAME=cassandra-4.0.1-20210715git51f16a3.el7.noarch.rpm
-ADD files/${PKG_NAME} /tmp/
+ARG PKG_NAME=""
+ADD rpms/${PKG_NAME} /tmp/
 RUN rpm -ivh /tmp/${PKG_NAME}
+
+ARG TOOL_PKG_NAME=""
+ADD rpms/${TOOL_PKG_NAME} /tmp/
+RUN rpm -ivh /tmp/${TOOL_PKG_NAME}
 
 # 7000: intra-node communication
 # 7001: TLS intra-node communication

@@ -6,7 +6,11 @@ all: build
 
 container:
 	@echo "Building ${REPO}:${VERSION}"
-	docker build --pull -t ${REPO}:${VERSION} .
+	rm -fR rpms/*
+	cp cassandra/build/rpmbuild/RPMS/noarch/* rpms/
+	docker build --pull -t ${REPO}:${VERSION}  \
+		--build-arg PKG_NAME=`find rpms -type f -printf '%f\n' | grep -e "cassandra-[0-9].*"`  \
+		--build-arg TOOL_PKG_NAME=`find rpms -type f -printf '%f\n' | grep -e "cassandra-tools-[0-9].*"` .
 
 build: container
 
