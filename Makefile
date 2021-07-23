@@ -15,7 +15,7 @@ container:
 build: container
 
 run:
-	docker run --net=host -it -d --name=cassandra ${REPO}:${VERSION} /bin/bash
+	docker run --net=host -it --name=cassandra ${REPO}:${VERSION} /bin/bash
 
 stop:
 	docker ps | grep ${REPO}:${VERSION} | cut -d " " -f 1 | xargs docker stop || echo 'failed to stop'
