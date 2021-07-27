@@ -16,5 +16,7 @@ RUN rpm -ivh /tmp/${TOOL_PKG_NAME}
 # 9160: thrift service
 EXPOSE 7000 7001 7199 9042 9160
 
+ENV LOCAL_JMX=no
+
 USER cassandra
 CMD ["cassandra", "-f"]
